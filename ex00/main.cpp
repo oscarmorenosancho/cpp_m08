@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 10:53:53 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/10/06 11:44:08 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:41:57 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int main(int, char const **)
 {
-	std::array<int, 10> test;
+	std::vector<int> test;
 	for (int i = 0; i < 10; i++)
 		test[i] = i;
 	int& number = easyfind(test, 5);

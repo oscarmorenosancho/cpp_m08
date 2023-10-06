@@ -6,21 +6,22 @@
 /*   By: omoreno- <omoreno-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 10:58:19 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/10/06 11:44:53 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/10/06 16:43:25 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _EASYFIND_TPP_
 # define _EASYFIND_TPP_
-# include <array>
+# include <vector>
+# include <algorithm>
 
-template <typename T>
-int& easyfind(const T& t, int n)
+template <typename Container>
+const int& easyfind(const Container& ctnr, int n)
 {
-	std::array<int, 1> to_find = {n};
-	std::array<int, 1> out;
-	out = std::find_first_of(t, to_find);
-	return (out[0]); 
+	Container to_find;
+	to_find.insert(n);
+	auto out = std::find_first_of(ctnr.begin(), ctnr.end(), to_find.begin(), to_find.end());
+	return (out[0]);
 }
 
 #endif
