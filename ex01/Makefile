@@ -6,20 +6,24 @@
 #    By: omoreno- <omoreno-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/22 16:22:46 by omoreno-          #+#    #+#              #
-#    Updated: 2023/10/07 19:28:49 by omoreno-         ###   ########.fr        #
+#    Updated: 2023/10/07 19:31:09 by omoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME:= easyfind
+NAME:= span
+
+CLASSSRC	:=	Span.cpp
 
 MAINSRC		:=	main.cpp
 
 BUILD_PATH	:= .build/
-HEADER		:=	easyfind.hpp
-TMPL		:=	easyfind.tpp
 
 MAINOBJ		:= $(addprefix $(BUILD_PATH), $(MAINSRC:.cpp=.o))
 MAINDEPS	:= $(addprefix $(BUILD_PATH), $(MAINSRC:.cpp=.d))
+CLASSOBJ	:= $(addprefix $(BUILD_PATH), $(CLASSSRC:.cpp=.o))
+CLASSDEPS	:= $(addprefix $(BUILD_PATH), $(CLASSSRC:.cpp=.d))
+
+HEADER		:= $(CLASSSRC:.cpp=.hpp)
 
 CC			:=	c++
 RM			:=	@rm -Rf
@@ -29,15 +33,15 @@ folder_create 	= $(shell mkdir -p $(1))
 
 .SECONDEXPANSION:
 
-$(BUILD_PATH)%.o : %.cpp ${HEADER} ${TMPL} Makefile | $$(call folder_create,$$(dir $$@))
+$(BUILD_PATH)%.o : %.cpp ${HEADER} Makefile | $$(call folder_create,$$(dir $$@))
 	@echo "Compiling" $@
 	${CC} ${CFLAGS} -c -I. $< -o $@
 
 all : $(NAME)
 
-$(NAME) : ${MAINOBJ} ${HEADER} ${TMPL} Makefile
+$(NAME) : ${MAINOBJ} ${CLASSOBJ} ${HEADER} Makefile
 	@echo "Linking" $@
-	${CC} ${CFLAGS} ${MAINOBJ} -o $@
+	${CC} ${CFLAGS} ${MAINOBJ} ${CLASSOBJ} -o $@
 
 clean :
 	@echo "Cleaning $(BUILD_PATH) ..."
