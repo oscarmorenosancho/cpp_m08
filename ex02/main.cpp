@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:54:05 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/10/09 14:09:17 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/10/09 14:20:36 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ int main()
 		std::cout << *it << std::endl;
 		++it; 
 	}
-	//std::stack<int> s(mstack);
+	std::stack<int> s(mstack);
 	return 0;
 }
