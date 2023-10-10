@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:54:05 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/10/09 14:20:36 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/10/10 14:26:59 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int main()
 	//[...] mstack.push(0);
 	MutantStack<int>::iterator it = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end();
-	std::cout << "my displays" << std::endl; //my addition
-	std::cout << it[0] << std::endl; //my addition
-	std::cout << ite[0] << std::endl; //my addition
+	// std::cout << "my displays" << std::endl; //my addition
+	// std::cout << it[0] << std::endl; //my addition
+	// std::cout << ite[0] << std::endl; //my addition
 	++it;
 	--it;
 	while (it != ite) 
@@ -42,3 +42,32 @@ int main()
 	std::stack<int> s(mstack);
 	return 0;
 }
+
+// #include <list>
+// #include <stack>
+
+// int main()
+// {
+// 	std::list<int> mstack;
+// 	mstack.push_back(5);
+// 	mstack.push_back(17);
+// 	std::cout << mstack.back() << std::endl;
+// 	mstack.pop_back();
+// 	std::cout << mstack.size() << std::endl;
+// 	mstack.push_back(3);
+// 	mstack.push_back(5);
+// 	mstack.push_back(737);
+// 	std::cout << mstack.size() << std::endl; //my addition
+// 	//[...] mstack.push(0);
+// 	std::list<int>::iterator it = mstack.begin();
+// 	std::list<int>::iterator ite = mstack.end();
+// 	++it;
+// 	--it;
+// 	while (it != ite) 
+// 	{
+// 		std::cout << *it << std::endl;
+// 		++it; 
+// 	}
+// 	std::stack<int, std::list<int> > s(mstack);
+// 	return 0;
+// }
