@@ -6,17 +6,20 @@
 /*   By: omoreno- <omoreno-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 18:45:02 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/10/09 14:55:46 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/10/10 13:22:14 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <Span.hpp>
 #include <iostream>
+#define EOVF "Exception: overflow, container don't allow to add more elements"
+#define ETFE "Exception: less than two elements"
 
-Span::Span(unsigned int	N)
+
+Span::Span(unsigned int	N) : overflow(EOVF), tooFewElements(ETFE)
 {
-	size = N;
-	arr = new std::vector<int>(size);
+	stored = 0;
+	arr = new std::vector<int>(N);
 }
 
 Span::~Span()
@@ -26,64 +29,78 @@ Span::~Span()
 
 void	Span::addNumber(int n)
 {
-	if (arr)
-		arr->push_back(n);
+	if (!arr || stored >= arr->size())
+		throw overflow;
+	std::vector<int>::iterator it = arr->begin();
+	it[stored] = n;
+	stored++;
+}
+
+void	Span::addRangeOfNumbers(std::vector<int> range)
+{
+	std::vector<int>::iterator it = range.begin();
+	std::vector<int>::iterator ite = range.end();
+	if (!arr || (stored + range.size() > arr->size()))
+		throw overflow;
+	while (it != ite)
+	{
+		addNumber(*it);
+		it++;
+	}
 }
 
 int		Span::shortestSpan()
 {
-	if (size < 2)
-		throw;
+	if (!arr || arr->size() < 2 || stored < 2)
+		throw tooFewElements;
 	int shortest;
-	if (arr)
+	int prev;
+	sortSpan();
+	std::vector<int>::iterator it = arr->begin();
+	std::vector<int>::iterator ite = arr->end();
+	prev = *it;
+	it++;
+	shortest = *it - prev;
+	prev = *it;
+	it++;
+	while (it != ite)
 	{
-		int prev;
-		std::sort(arr->begin(), arr->end());
-		std::vector<int>::iterator it = arr->begin();
-		std::vector<int>::iterator ite = arr->end();
+		int tmp = *it - prev;
+		if (tmp < shortest)
+			shortest = tmp;
 		prev = *it;
 		it++;
-		shortest = *it - prev;
-		it++;
-		while (it != ite)
-		{
-			int tmp = *it - prev;
-			std::cout << "shortest tmp: " << tmp << " *it: " << (*it) << " prev: " << prev << std::endl;
-			if (tmp < shortest)
-				shortest = tmp;
-			it++;
-			prev = *it;
-		}
-		return (shortest);
 	}
-	return (0);
+	return (shortest);
 }
 
 int 	Span::longestSpan()
 {
-	if (size < 2)
-		throw;
-	int longest;
+	if (!arr || arr->size() < 2 || stored < 2)
+		throw tooFewElements;
+	sortSpan();
+	std::vector<int>::iterator it = arr->begin();
+	int min_value = it[0];
+	int max_value = it[arr->size() - 1];
+	return (max_value - min_value);
+}
+
+void 	Span::printSpan()
+{
 	if (arr)
 	{
-		int prev;
-		std::sort(arr->begin(), arr->end());
 		std::vector<int>::iterator it = arr->begin();
 		std::vector<int>::iterator ite = arr->end();
-		prev = *it;
-		it++;
-		longest = *it - prev;
-		it++;
 		while (it != ite)
 		{
-			int tmp = *it - prev;
-			std::cout << "longest tmp: " << tmp << " *it: " << (*it) << " prev: " << prev << std::endl;
-			if (tmp > longest)
-				longest = tmp;
-			prev = *it;
+			std::cout << "*it: " << (*it) << std::endl;
 			it++;
-		}
-		return (longest);
+		}		
 	}
-	return (0);
+}
+
+void	Span::sortSpan()
+{
+	if (arr)
+		std::sort(arr->begin(), arr->end());
 }

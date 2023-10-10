@@ -14,18 +14,24 @@
 # define _SPAN_HPP_
 # include <algorithm>
 # include <vector>
+# include <exception>
 
 class Span
 {
 private:
-	unsigned int			size;
+	unsigned int			stored;
 	std::vector<int>		*arr;
+	std::overflow_error		overflow;
+	std::runtime_error		tooFewElements;
 public:
 	Span(unsigned int	N);
 	~Span();
 	void	addNumber(int n);
+	void	addRangeOfNumbers(std::vector<int> range);
 	int		shortestSpan();
 	int 	longestSpan();
+	void 	printSpan();
+	void 	sortSpan();
 };
 
 
