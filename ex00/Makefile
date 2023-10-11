@@ -6,7 +6,7 @@
 #    By: omoreno- <omoreno-@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/22 16:22:46 by omoreno-          #+#    #+#              #
-#    Updated: 2023/10/07 19:28:49 by omoreno-         ###   ########.fr        #
+#    Updated: 2023/10/11 10:48:40 by omoreno-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ MAINDEPS	:= $(addprefix $(BUILD_PATH), $(MAINSRC:.cpp=.d))
 
 CC			:=	c++
 RM			:=	@rm -Rf
-CFLAGS		:=	-Wall -Werror -Wextra -std=c++98 -g
+CFLAGS		:=	-Wall -Werror -Wextra -std=c++98 -pedantic
 
 folder_create 	= $(shell mkdir -p $(1))
 

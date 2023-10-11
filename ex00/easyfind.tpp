@@ -6,7 +6,7 @@
 /*   By: omoreno- <omoreno-@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 10:58:19 by omoreno-          #+#    #+#             */
-/*   Updated: 2023/10/07 18:36:29 by omoreno-         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:05:25 by omoreno-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 template <typename Container>
 int easyfind(const Container& ctnr, int n)
 {
-	const int it = std::find(ctnr.begin(), ctnr.end(), n)[0];
-  	if (it != *ctnr.end())
-		return (it);
+	typename Container::const_iterator it = std::find(ctnr.begin(), ctnr.end(), n);
+  	if (it != ctnr.end())
+		return (it - ctnr.begin());
   	else
     	throw std::runtime_error("Exception: Element Not Found in Container");	
 }
